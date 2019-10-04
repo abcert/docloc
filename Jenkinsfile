@@ -11,9 +11,14 @@ pipeline {
         echo 'Testing..'
       }
     }
-    stage('Deploy') {
+    stage('DeployToDev') {
       steps {
         echo 'Deploying....'
+      }
+    }
+    stage('DevApproval') {
+      steps {
+        input(message: 'Ready To Send to Testing', id: 'devToTesting', ok: 'OK')
       }
     }
   }
