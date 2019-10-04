@@ -4,6 +4,10 @@ pipeline {
     stage('Build') {
       steps {
         build(quietPeriod: 5, wait: true, job: 'ScalaCode')
+        node(label: 'allocateNode') {
+          echo 'test'
+        }
+
       }
     }
     stage('Test') {
