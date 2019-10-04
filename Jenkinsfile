@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        echo 'Building..'
+        build(quietPeriod: 5, wait: true, job: 'ScalaCode')
       }
     }
     stage('Test') {
