@@ -1,4 +1,9 @@
-#!groovypipeline {agent {
+#!groovy
+
+pipeline 
+{
+  agent 
+ {
   docker {
     image 'jenkinsslave:latest'
     registryUrl 'http://8598567586.dkr.ecr.us-west-2.amazonaws.com'
@@ -53,7 +58,7 @@ stage('Checkout') {
 }stage('Build') {
             steps {
                 echo 'Run coverage and CLEAN UP Before please'
-                sh '/usr/local/bin/opt/bin/sbtGitActivator; /usr/local/bin/opt/play-2.5.10/bin/activator -Dsbt.global.base=.sbt -Dsbt.ivy.home=/home/jenkins/.ivy2 -Divy.home=/home/jenkins/.ivy2 compile coverage test coverageReport coverageOff dist'
+                //sh '/usr/local/bin/opt/bin/sbtGitActivator; /usr/local/bin/opt/play-2.5.10/bin/activator -Dsbt.global.base=.sbt -Dsbt.ivy.home=/home/jenkins/.ivy2 -Divy.home=/home/jenkins/.ivy2 compile coverage test coverageReport coverageOff dist'
             }
         }stage('Publish Reports') {
     parallel {
@@ -64,7 +69,7 @@ stage('Checkout') {
         }
         stage('Publish Junit Report') {
             steps {
-                junit allowEmptyResults: true, testResults: 'target/test-reports/*.xml'
+                //junit allowEmptyResults: true, testResults: 'target/test-reports/*.xml'
             }
         }
         stage('Publish Junit HTML Report') {
@@ -98,7 +103,7 @@ stage('Checkout') {
         }
         stage('SonarQube analysis') {
             steps {
-                sh "/usr/bin/sonar-scanner"
+                //sh "/usr/bin/sonar-scanner"
             }
         }
         stage('ArchiveArtifact') {
